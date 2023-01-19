@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <base target="_top">
+  <?!= include('css'); ?>
+</head>
+
+<body>
+  <div class="container">
+    <h2>Proforma generada exitosamente prueba</h2>
+
+    <button class="btn btn-success" id="back" type="button">Generar otra proforma</button>
+    <div class="btn btn-info" id="btnImp">
+      <span id="cargando" role="status" aria-hidden="true"></span>
+      Imprimir
+    </div>
+    <div class="" id="info"></div>
+    <a class="btn btn-dark" href="https://drive.google.com/drive/folders/1o5Hwc-Vsy5I-Om_OsuSs_oLShXoJLtGQ"
+      role="button" target="_blank">Abrir carpetas con proformas</a>
+
+  </div>
+  <?!= include('js'); ?>
+  <script>
+    const $btnLoading = document.getElementById("cargando");
+
+    document.getElementById("back").addEventListener("click", e => {
+      alert("Se abrirá otra ventana")
+      console.log()
+      open("https://script.google.com/a/macros/losacordeones.com/s/AKfycbyq6mvKhyiRy1uiuwOyrQ9KO39B9m-l0i8fUdVVuRI9aWOXp1wva-5sCmx0rT-Tmdwx/exec")
+    })
+
+    window.addEventListener("load", e => {
+      google.script.run.withSuccessHandler().setCurrencyFormat()
+
+      traerInfoPdf()
+    })
+
+    function traerInfoPdf() {
+      $btnLoading.classList.add("spinner-border", "spinner-border-sm")
+      google.script.run.withSuccessHandler(cargarInfo).crearPdf()
+
+    }
+
+    function cargarInfo(info) {
+      document.getElementById("info").innerHTML = "<p>Se imprimió el registro</p>"
+      $btnLoading.classList.remove("spinner-border", "spinner-border-sm")
+
+    }
+
+  </script>
+</body>
+
+</html>

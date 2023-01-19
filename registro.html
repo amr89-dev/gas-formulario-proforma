@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <base target="_top">
+  <?!= include('css'); ?>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
+</head>
+
+<body>
+  <nav class="navbar bg-danger">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="https://i.postimg.cc/KjvQrDkz/LOGO.jpg" alt="" width="100px" height="100px"
+          class="d-inline-block align-text-top rounded-circle"> </a>
+      <h1 class="d-inline align-self-center">LOS ACORDEONES.COM</h1>
+    </div>
+  </nav>
+  <div class="container mt-2 rounded d-flex justify-content-between">
+    <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#formularioRegistro"
+      aria-expanded="false" aria-controls="collapseExample">
+      Abrir formulario de Proformas
+    </button>
+    <a class="btn btn-dark" href="https://drive.google.com/drive/folders/1o5Hwc-Vsy5I-Om_OsuSs_oLShXoJLtGQ"
+      role="button" target="_blank">Abrir carpetas con proformas</a>
+
+    <a class="btn btn-warning"
+      href="https://script.google.com/a/macros/losacordeones.com/s/AKfycbwzE48XVK8NrWHGtbAlkLI9G0bBoxSwkD1_4kPwA_-lRt_jfDKcB5cflcAWU83h9yjI/exec"
+      role="button">Abrir pagina de trabajos pendientes</a>
+  </div>
+
+  <!--   <div class="container mt-5 col-md-12">
+    <h3>Consulta Rápida de Producto</h3>
+          <div class="col-6 d-flex">
+        <input class="form-control" list="datalistOptions" name="productoServicioDatalistR"
+          id="productoServicioDatalistR" placeholder="Buscar..." onchange="actualizarInfo(this)">
+        <datalist id="datalistOptions">
+        </datalist>
+      </div>
+      
+    <textarea name="textarea" rows="10" cols="5" class="form-control mt-3  text-wrap" id="bar" wrap="hard" ></textarea>
+      <button class="btn btn-primary mt-2" id="btn-cut" data-clipboard-action="cut" data-clipboard-target="#bar">
+    Cortar
+    
+</button>
+    
+  </div> -->
+
+
+  <div class="container mt-5 rounded bg-light">
+    <form class="row g-3 needs-validation collapse" id="formularioRegistro" method="POST" action="<?= pubUrl ?>"
+      novalidate>
+
+      <legend>Datos personales</legend>
+      <div class="col-md-4">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="name" name="name">
+      </div>
+
+      <div class="col-md-4">
+        <label for="apellido" class="form-label">Apellido</label>
+        <input type="text" class="form-control" id="apellido" name="apellido">
+        <div class="valid-feedback">
+          Bien !!
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="Cedula" class="form-label">Cedula</label>
+        <input type="number" class="form-control" id="cedula" name="cedula">
+      </div>
+
+      <div class="col-md-8">
+        <label for="direccion" class="form-label">Dirección</label>
+        <input type="text" class="form-control" id="direccion" name="direccion">
+        <div class="invalid-feedback">
+          Por favor ingrese una dirección
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="ciudad" class="form-label">Ciudad</label>
+        <input type="text" class="form-control" id="ciudad" name="ciudad">
+        <div class="invalid-feedback">
+          Por favor ingrese una ciudad
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <label for="telefono" class="form-label">Telefono</label>
+        <input type="tel" class="form-control" id="telefono" name="telefono">
+        <div class="invalid-feedback">
+          Por favor intrdozca un numero de telefono.
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <label for="email" class="form-label">Correo Electrónico</label>
+        <input type="email" class="form-control" id="email" name="correo">
+
+      </div>
+      <div class="col-md-4">
+        <label for="fechaEntrega" class="form-label">Fecha de Entrega</label>
+        <input type="date" class="form-control" id="fechaEntrega" name="fechaEntrega" required>
+
+      </div>
+
+      <legend>Cotizacion</legend>
+      <!-- ********************************** -->
+
+      <div class="col-md-6">
+        <label for="productoServicioDatalist1" class="form-label">Item 1</label>
+        <input class="form-control" list="datalistOptions" name="productoServicioDatalist1"
+          id="productoServicioDatalist1" placeholder="Buscar..." onchange="actualizarInfo(this)">
+        <datalist id="datalistOptions">
+        </datalist>
+      </div>
+
+      <div class="col-md-2">
+        <label for="precio1" class="form-label">Valor</label>
+        <input type="text" class="form-control" id="precio1" name="precio1">
+      </div>
+      <div class="col-md-1">
+        <label for="cantidad1" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" id="cantidad1" name="cantidad1" onchange="actualizarPrecio(this)">
+      </div>
+      <div class="col-md-2">
+        <label for="precioTotal1" class="form-label"> Valor Total</label>
+        <input type="text" class="form-control" id="precioTotal1" name="precioTotal1">
+      </div>
+      <div class="col-md-1">
+        <label for="referencia1" class="form-label">Referencia</label>
+        <input type="text" class="form-control" id="referencia1" name="referencia1">
+      </div>
+
+      <!-- ********************************** -->
+      <div class="col-md-6">
+        <label for="productoServicioDatalist2" class="form-label">Item 2</label>
+        <input class="form-control" list="datalistOptions" name="productoServicioDatalist2"
+          id="productoServicioDatalist2" placeholder="Buscar..." onchange="actualizarInfo(this)">
+        <datalist id="datalistOptions">
+        </datalist>
+      </div>
+
+      <div class="col-md-2">
+        <label for="precio2" class="form-label">Valor</label>
+        <input type="text" class="form-control" id="precio2" name="precio2">
+      </div>
+      <div class="col-md-1">
+        <label for="cantidad2" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" id="cantidad2" name="cantidad2" onchange="actualizarPrecio(this)">
+      </div>
+      <div class="col-md-2">
+        <label for="precioTotal2" class="form-label"> Valor Total</label>
+        <input type="text" class="form-control" id="precioTotal2" name="precioTotal2">
+      </div>
+      <div class="col-md-1">
+        <label for="referencia2" class="form-label">Referencia</label>
+        <input type="text" class="form-control" id="referencia2" name="referencia2">
+      </div>
+      <!-- ********************************** -->
+      <div class="col-md-6">
+        <label for="productoServicioDatalist3" class="form-label">Item 3</label>
+        <input class="form-control" list="datalistOptions" name="productoServicioDatalist3"
+          id="productoServicioDatalist3" placeholder="Buscar..." onchange="actualizarInfo(this)">
+        <datalist id="datalistOptions">
+        </datalist>
+      </div>
+
+      <div class="col-md-2">
+        <label for="precio3" class="form-label">Valor</label>
+        <input type="text" class="form-control" id="precio3" name="precio3">
+      </div>
+      <div class="col-md-1">
+        <label for="cantidad3" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" id="cantidad3" name="cantidad3" onchange="actualizarPrecio(this)">
+      </div>
+      <div class="col-md-2">
+        <label for="precioTotal3" class="form-label"> Valor Total</label>
+        <input type="text" class="form-control" id="precioTotal3" name="precioTotal3">
+      </div>
+      <div class="col-md-1">
+        <label for="referencia3" class="form-label">Referencia</label>
+        <input type="text" class="form-control" id="referencia3" name="referencia3">
+      </div>
+      <!-- ********************************** -->
+      <div class="col-md-6">
+        <label for="productoServicioDatalist4" class="form-label">Item 4</label>
+        <input class="form-control" list="datalistOptions" name="productoServicioDatalist4"
+          id="productoServicioDatalist4" placeholder="Buscar..." onchange="actualizarInfo(this)">
+        <datalist id="datalistOptions">
+        </datalist>
+      </div>
+
+      <div class="col-md-2">
+        <label for="precio4" class="form-label">Valor</label>
+        <input type="text" class="form-control" id="precio4" name="precio4">
+      </div>
+      <div class="col-md-1">
+        <label for="cantidad4" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" id="cantidad4" name="cantidad4" onchange="actualizarPrecio(this)">
+      </div>
+      <div class="col-md-2">
+        <label for="precioTotal4" class="form-label"> Valor Total</label>
+        <input type="text" class="form-control" id="precioTotal4" name="precioTotal4">
+      </div>
+      <div class="col-md-1">
+        <label for="referencia4" class="form-label">Referencia</label>
+        <input type="text" class="form-control" id="referencia4" name="referencia4">
+      </div>
+      <!-- ********************************** -->
+      <div class="col-md-6">
+        <label for="productoServicioDatalist5" class="form-label">Item 5</label>
+        <input class="form-control" list="datalistOptions" name="productoServicioDatalist5"
+          id="productoServicioDatalist5" placeholder="Buscar..." onchange="actualizarInfo(this)">
+        <datalist id="datalistOptions">
+        </datalist>
+      </div>
+
+      <div class="col-md-2">
+        <label for="precio5" class="form-label">Valor</label>
+        <input type="text" class="form-control" id="precio5" name="precio5">
+      </div>
+      <div class="col-md-1">
+        <label for="cantidad5" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" id="cantidad5" name="cantidad5" onchange="actualizarPrecio(this)">
+      </div>
+      <div class="col-md-2">
+        <label for="precioTotal5" class="form-label"> Valor Total</label>
+        <input type="text" class="form-control" id="precioTotal5" name="precioTotal5">
+      </div>
+      <div class="col-md-1">
+        <label for="referencia5" class="form-label">Referencia</label>
+        <input type="text" class="form-control" id="referencia5" name="referencia5">
+      </div>
+      <!-- ********************************** -->
+      <div class="col-md-6">
+        <label for="productoServicioDatalist6" class="form-label">Item 6</label>
+        <input class="form-control" list="datalistOptions" name="productoServicioDatalist6"
+          id="productoServicioDatalist6" placeholder="Buscar..." onchange="actualizarInfo(this)">
+        <datalist id="datalistOptions">
+        </datalist>
+      </div>
+
+      <div class="col-md-2">
+        <label for="precio6" class="form-label">Valor</label>
+        <input type="text" class="form-control" id="precio6" name="precio6">
+      </div>
+      <div class="col-md-1">
+        <label for="cantidad6" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" id="cantidad6" name="cantidad6" onchange="actualizarPrecio(this)">
+      </div>
+      <div class="col-md-2">
+        <label for="precioTotal6" class="form-label"> Valor Total</label>
+        <input type="text" class="form-control" id="precioTotal6" name="precioTotal6">
+      </div>
+      <div class="col-md-1">
+        <label for="referencia6" class="form-label">Referencia</label>
+        <input type="text" class="form-control" id="referencia6" name="referencia6">
+      </div>
+      <!-- ********************************** -->
+      <div class="col-md-6">
+        <label for="productoServicioDatalist7" class="form-label">Item 7</label>
+        <input class="form-control" list="datalistOptions" name="productoServicioDatalist7"
+          id="productoServicioDatalist7" placeholder="Buscar..." onchange="actualizarInfo(this)">
+        <datalist id="datalistOptions">
+        </datalist>
+      </div>
+
+      <div class="col-md-2">
+        <label for="precio7" class="form-label">Valor</label>
+        <input type="text" class="form-control" id="precio7" name="precio7">
+      </div>
+      <div class="col-md-1">
+        <label for="cantidad7" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" id="cantidad7" name="cantidad7" onchange="actualizarPrecio(this)">
+      </div>
+      <div class="col-md-2">
+        <label for="precioTotal7" class="form-label"> Valor Total</label>
+        <input type="text" class="form-control" id="precioTotal7" name="precioTotal7">
+      </div>
+      <div class="col-md-1">
+        <label for="referencia7" class="form-label">Referencia</label>
+        <input type="text" class="form-control" id="referencia7" name="referencia7">
+      </div>
+      <!-- ********************************** -->
+      <div class="col-md-6">
+        <label for="productoServicioDatalist8" class="form-label">Item 8</label>
+        <input class="form-control" list="datalistOptions" name="productoServicioDatalist8"
+          id="productoServicioDatalist8" placeholder="Buscar..." onchange="actualizarInfo(this)">
+        <datalist id="datalistOptions">
+        </datalist>
+      </div>
+
+      <div class="col-md-2">
+        <label for="precio8" class="form-label">Valor</label>
+        <input type="text" class="form-control" id="precio8" name="precio8">
+      </div>
+      <div class="col-md-1">
+        <label for="cantidad8" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" id="cantidad8" name="cantidad8" onchange="actualizarPrecio(this)">
+      </div>
+      <div class="col-md-2">
+        <label for="precioTotal8" class="form-label"> Valor Total</label>
+        <input type="text" class="form-control" id="precioTotal8" name="precioTotal8">
+      </div>
+      <div class="col-md-1">
+        <label for="referencia8" class="form-label">Referencia</label>
+        <input type="text" class="form-control" id="referencia8" name="referencia8">
+      </div>
+      <!-- ********************************** -->
+      <div class="col-md-6">
+        <label for="productoServicioDatalist9" class="form-label">Item 9</label>
+        <input class="form-control" list="datalistOptions" name="productoServicioDatalist9"
+          id="productoServicioDatalist9" placeholder="Buscar..." onchange="actualizarInfo(this)">
+        <datalist id="datalistOptions">
+        </datalist>
+      </div>
+
+      <div class="col-md-2">
+        <label for="precio9" class="form-label">Valor</label>
+        <input type="text" class="form-control" id="precio9" name="precio9">
+      </div>
+      <div class="col-md-1">
+        <label for="cantidad9" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" id="cantidad9" name="cantidad9" onchange="actualizarPrecio(this)">
+      </div>
+      <div class="col-md-2">
+        <label for="precioTotal9" class="form-label"> Valor Total</label>
+        <input type="text" class="form-control" id="precioTotal9" name="precioTotal9">
+      </div>
+      <div class="col-md-1">
+        <label for="referencia9" class="form-label">Referencia</label>
+        <input type="text" class="form-control" id="referencia9" name="referencia9">
+      </div>
+      <!-- ********************************** -->
+      <div class="col-md-6">
+        <label for="productoServicioDatalist10" class="form-label">Item 10</label>
+        <input class="form-control" list="datalistOptions" name="productoServicioDatalist10"
+          id="productoServicioDatalist10" placeholder="Buscar..." onchange="actualizarInfo(this)">
+        <datalist id="datalistOptions">
+        </datalist>
+      </div>
+
+      <div class="col-md-2">
+        <label for="precio10" class="form-label">Valor</label>
+        <input type="text" class="form-control" id="precio10" name="precio10">
+      </div>
+      <div class="col-md-1">
+        <label for="cantidad10" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" id="cantidad10" name="cantidad10" onchange="actualizarPrecio(this)">
+      </div>
+      <div class="col-md-2">
+        <label for="precioTotal10" class="form-label"> Valor Total</label>
+        <input type="text" class="form-control" id="precioTotal10" name="precioTotal10">
+      </div>
+      <div class="col-md-1">
+        <label for="referencia10" class="form-label">Referencia</label>
+        <input type="text" class="form-control" id="referencia10" name="referencia10">
+      </div>
+      <!-- ********************************** -->
+      <div class="col-md-6">
+        <label for="productoServicioDatalist11" class="form-label">Item 11</label>
+        <input class="form-control" list="datalistOptions" name="productoServicioDatalist11"
+          id="productoServicioDatalist11" placeholder="Buscar..." onchange="actualizarInfo(this)">
+        <datalist id="datalistOptions">
+        </datalist>
+      </div>
+
+      <div class="col-md-2">
+        <label for="precio11" class="form-label">Valor</label>
+        <input type="text" class="form-control" id="precio11" name="precio11">
+      </div>
+      <div class="col-md-1">
+        <label for="cantidad11" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" id="cantidad11" name="cantidad11" onchange="actualizarPrecio(this)">
+      </div>
+      <div class="col-md-2">
+        <label for="precioTotal11" class="form-label"> Valor Total</label>
+        <input type="text" class="form-control" id="precioTotal11" name="precioTotal11">
+      </div>
+      <div class="col-md-1">
+        <label for="referencia11" class="form-label">Referencia</label>
+        <input type="text" class="form-control" id="referencia11" name="referencia11">
+      </div>
+      <!-- ********************************** -->
+      <div class="col-md-6">
+        <label for="productoServicioDatalist12" class="form-label">Item 12</label>
+        <input class="form-control" list="datalistOptions" name="productoServicioDatalist12"
+          id="productoServicioDatalist12" placeholder="Buscar..." onchange="actualizarInfo(this)">
+        <datalist id="datalistOptions">
+        </datalist>
+      </div>
+
+      <div class="col-md-2">
+        <label for="precio12" class="form-label">Valor</label>
+        <input type="text" class="form-control" id="precio12" name="precio12">
+      </div>
+      <div class="col-md-1">
+        <label for="cantidad12" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" id="cantidad12" name="cantidad12" onchange="actualizarPrecio(this)">
+      </div>
+      <div class="col-md-2">
+        <label for="precioTotal12" class="form-label"> Valor Total</label>
+        <input type="text" class="form-control" id="precioTotal12" name="precioTotal12">
+      </div>
+      <div class="col-md-1">
+        <label for="referencia12" class="form-label">Referencia</label>
+        <input type="text" class="form-control" id="referencia12" name="referencia12">
+      </div>
+
+      <div class="col-md-12 ">
+        <label for="totalTotal" class="form-label text-left">Total</label>
+        <input type="text" class="form-control" id="totalTotal" name="total" value="$0">
+
+      </div>
+
+      <div class="col-12 mb-5">
+        <button class="btn btn-primary" type="submit">Enviar</button>
+      </div>
+    </form>
+  </div>
+  <?!= include('js'); ?>
+
+
+  <script>
+    window.addEventListener("load", loadInfoDatalist);
+    const $pendientes = document.getElementById("pendientes");
+    const dtlProductos = document.getElementById("datalistOptions");
+    function loadInfoDatalist() {
+      google.script.run.withSuccessHandler(cargarDatalist).getDataProductos()
+    }
+
+    function cargarDatalist(dataProductos) {
+      //console.log(dataProductos)
+      const inputProductos = dtlProductos;
+      dataProductos.forEach(el => {
+        const option = document.createElement("option");
+        option.value = el[1];
+        option.text = `$${el[2]}`;
+        option.dataset.referencia = el[0];
+        option.dataset.precio = el[2];
+        inputProductos.appendChild(option);
+
+      })
+    }
+    /*   function cotiRapida(dataProductos){
+        console.log(dataProductos)
+        const textRapido = document.getElementById("text-rapido");
+        
+      } */
+    function actualizarInfo(datalist) {
+      //console.log(datalist.id)
+      for (let i = 0; i < dtlProductos.options.length; i++) {
+        let currentValue = dtlProductos.options[i].value;
+        let currentAttribute = dtlProductos.options[i]
+        // console.log(currentValue, currentAttribute);
+        switch (datalist.id) {
+
+          case "productoServicioDatalist1":
+            if (datalist.value === currentValue) {
+              document.getElementById("referencia1").value = currentAttribute.getAttribute("data-referencia");
+              document.getElementById("precio1").value = currentAttribute.getAttribute("data-precio");
+            }
+            break
+          case "productoServicioDatalist2":
+            if (datalist.value === currentValue) {
+              document.getElementById("referencia2").value = currentAttribute.getAttribute("data-referencia");
+              document.getElementById("precio2").value = currentAttribute.getAttribute("data-precio");
+            }
+            break
+          case "productoServicioDatalist3":
+            if (datalist.value === currentValue) {
+              document.getElementById("referencia3").value = currentAttribute.getAttribute("data-referencia");
+              document.getElementById("precio3").value = currentAttribute.getAttribute("data-precio");
+            }
+            break
+          case "productoServicioDatalist4":
+            if (datalist.value === currentValue) {
+              document.getElementById("referencia4").value = currentAttribute.getAttribute("data-referencia");
+              document.getElementById("precio4").value = currentAttribute.getAttribute("data-precio");
+            }
+            break
+          case "productoServicioDatalist5":
+            if (datalist.value === currentValue) {
+              document.getElementById("referencia5").value = currentAttribute.getAttribute("data-referencia");
+              document.getElementById("precio5").value = currentAttribute.getAttribute("data-precio");
+            }
+            break
+          case "productoServicioDatalist6":
+            if (datalist.value === currentValue) {
+              document.getElementById("referencia6").value = currentAttribute.getAttribute("data-referencia");
+              document.getElementById("precio6").value = currentAttribute.getAttribute("data-precio");
+            }
+            break
+          case "productoServicioDatalist7":
+            if (datalist.value === currentValue) {
+              document.getElementById("referencia7").value = currentAttribute.getAttribute("data-referencia");
+              document.getElementById("precio7").value = currentAttribute.getAttribute("data-precio");
+            }
+            break
+          case "productoServicioDatalist8":
+            if (datalist.value === currentValue) {
+              document.getElementById("referencia8").value = currentAttribute.getAttribute("data-referencia");
+              document.getElementById("precio8").value = currentAttribute.getAttribute("data-precio");
+            }
+            break
+          case "productoServicioDatalist9":
+            if (datalist.value === currentValue) {
+              document.getElementById("referencia9").value = currentAttribute.getAttribute("data-referencia");
+              document.getElementById("precio9").value = currentAttribute.getAttribute("data-precio");
+            }
+            break
+          case "productoServicioDatalist10":
+            if (datalist.value === currentValue) {
+              document.getElementById("referencia10").value = currentAttribute.getAttribute("data-referencia");
+              document.getElementById("precio10").value = currentAttribute.getAttribute("data-precio");
+            }
+            break
+          case "productoServicioDatalist11":
+            if (datalist.value === currentValue) {
+              document.getElementById("referencia11").value = currentAttribute.getAttribute("data-referencia");
+              document.getElementById("precio11").value = currentAttribute.getAttribute("data-precio");
+            }
+            break
+          case "productoServicioDatalist12":
+            if (datalist.value === currentValue) {
+              document.getElementById("referencia12").value = currentAttribute.getAttribute("data-referencia");
+              document.getElementById("precio12").value = currentAttribute.getAttribute("data-precio");
+            }
+            break
+
+          default:
+          //console.log("ningun caso")
+        }
+      }
+
+    }
+    function actualizarPrecio(cantidad) {
+      var regex = /(\d+)/g;
+      let precioTotal;
+      let format = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
+
+      switch (cantidad.id) {
+        case "cantidad1":
+          let pre1 = document.getElementById("precio1").value
+          let numFormateado1 = format.format(parseInt(pre1.match(regex).join("")) * cantidad.value)
+          let pretotal1 = document.getElementById("precioTotal1").value = numFormateado1
+          break;
+
+        case "cantidad2":
+          let pre2 = document.getElementById("precio2").value
+          let numFormateado2 = format.format(parseInt(pre2.match(regex).join("")) * cantidad.value)
+          let pretotal2 = document.getElementById("precioTotal2").value = numFormateado2
+          break;
+
+        case "cantidad3":
+          let pre3 = document.getElementById("precio3").value
+          let numFormateado3 = format.format(parseInt(pre3.match(regex).join("")) * cantidad.value)
+          let pretotal3 = document.getElementById("precioTotal3").value = numFormateado3
+          break;
+
+        case "cantidad4":
+          let pre4 = document.getElementById("precio4").value
+          let numFormateado4 = format.format(parseInt(pre4.match(regex).join("")) * cantidad.value)
+          let pretotal4 = document.getElementById("precioTotal4").value = numFormateado4
+          break;
+
+        case "cantidad5":
+          let pre5 = document.getElementById("precio5").value
+          let numFormateado5 = format.format(parseInt(pre5.match(regex).join("")) * cantidad.value)
+          let pretotal5 = document.getElementById("precioTotal5").value = numFormateado5
+          break;
+
+        case "cantidad6":
+          let pre6 = document.getElementById("precio6").value
+          let numFormateado6 = format.format(parseInt(pre6.match(regex).join("")) * cantidad.value)
+          let pretotal6 = document.getElementById("precioTotal6").value = numFormateado6
+          break;
+
+        case "cantidad7":
+          let pre7 = document.getElementById("precio7").value
+          let numFormateado7 = format.format(parseInt(pre7.match(regex).join("")) * cantidad.value)
+          let pretotal7 = document.getElementById("precioTotal7").value = numFormateado7
+          break;
+
+        case "cantidad8":
+          let pre8 = document.getElementById("precio8").value
+          let numFormateado8 = format.format(parseInt(pre8.match(regex).join("")) * cantidad.value)
+          let pretotal8 = document.getElementById("precioTotal8").value = numFormateado8
+          break;
+        case "cantidad9":
+          let pre9 = document.getElementById("precio9").value
+          let numFormateado9 = format.format(parseInt(pre9.match(regex).join("")) * cantidad.value)
+          let pretotal9 = document.getElementById("precioTotal9").value = numFormateado9
+          break;
+        case "cantidad10":
+          let pre10 = document.getElementById("precio10").value
+          let numFormateado10 = format.format(parseInt(pre10.match(regex).join("")) * cantidad.value)
+          let pretotal10 = document.getElementById("precioTotal10").value = numFormateado10
+          break;
+        case "cantidad11":
+          let pre11 = document.getElementById("precio11").value
+          let numFormateado11 = format.format(parseInt(pre11.match(regex).join("")) * cantidad.value)
+          let pretotal11 = document.getElementById("precioTotal11").value = numFormateado11
+          break;
+        case "cantidad12":
+          let pre12 = document.getElementById("precio12").value
+          let numFormateado12 = format.format(parseInt(pre12.match(regex).join("")) * cantidad.value)
+          let pretotal12 = document.getElementById("precioTotal12").value = numFormateado12
+          break;
+
+        default:
+          "no hay nada"
+          break;
+      }
+      actualizarTotal(cantidad)
+    }
+
+    function actualizarTotal(identi) {
+      //console.log(identi.id);
+      const $total = document.getElementById("totalTotal")
+      var regex = /(\d+)/g;
+      let format = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
+      switch (identi.id) {
+
+        case "cantidad1": {
+          let $precio1 = document.getElementById("precioTotal1").value || 0;
+          $pre1 = parseInt($precio1.match(regex).join(""))
+          $total.value = format.format($pre1 / 100)
+        }
+          break;
+
+        case "cantidad2": {
+          let $precio1 = document.getElementById("precioTotal1").value || 0;
+          $pre1 = parseInt($precio1.match(regex).join(""))
+          let $precio2 = document.getElementById("precioTotal2").value || 0;
+          $pre2 = parseInt($precio2.match(regex).join(""))
+          $total.value = format.format(($pre1 + $pre2) / 100)
+        }
+          break;
+
+        case "cantidad3": {
+          let $precio1 = document.getElementById("precioTotal1").value || 0;
+          $pre1 = parseInt($precio1.match(regex).join(""))
+          let $precio2 = document.getElementById("precioTotal2").value || 0;
+          $pre2 = parseInt($precio2.match(regex).join(""))
+          let $precio3 = document.getElementById("precioTotal3").value || 0;
+          $pre3 = parseInt($precio3.match(regex).join(""))
+
+          $total.value = format.format(($pre1 + $pre2 + $pre3) / 100)
+        }
+          break;
+
+        case "cantidad4": {
+          let $precio1 = document.getElementById("precioTotal1").value || 0;
+          $pre1 = parseInt($precio1.match(regex).join(""))
+          let $precio2 = document.getElementById("precioTotal2").value || 0;
+          $pre2 = parseInt($precio2.match(regex).join(""))
+          let $precio3 = document.getElementById("precioTotal3").value || 0;
+          $pre3 = parseInt($precio3.match(regex).join(""))
+          let $precio4 = document.getElementById("precioTotal4").value || 0;
+          $pre4 = parseInt($precio4.match(regex).join(""))
+          $total.value = format.format(($pre1 + $pre2 + $pre3 + $pre4) / 100)
+        }
+          break;
+
+        case "cantidad5": {
+          let $precio1 = document.getElementById("precioTotal1").value || 0;
+          $pre1 = parseInt($precio1.match(regex).join(""))
+          let $precio2 = document.getElementById("precioTotal2").value || 0;
+          $pre2 = parseInt($precio2.match(regex).join(""))
+          let $precio3 = document.getElementById("precioTotal3").value || 0;
+          $pre3 = parseInt($precio3.match(regex).join(""))
+          let $precio4 = document.getElementById("precioTotal4").value || 0;
+          $pre4 = parseInt($precio4.match(regex).join(""))
+          let $precio5 = document.getElementById("precioTotal5").value || 0;
+          $pre5 = parseInt($precio5.match(regex).join(""))
+          $total.value = format.format(($pre1 + $pre2 + $pre3 + $pre4 + $pre5) / 100)
+        }
+          break;
+
+        case "cantidad6": {
+          let $precio1 = document.getElementById("precioTotal1").value || 0;
+          $pre1 = parseInt($precio1.match(regex).join(""))
+          let $precio2 = document.getElementById("precioTotal2").value || 0;
+          $pre2 = parseInt($precio2.match(regex).join(""))
+          let $precio3 = document.getElementById("precioTotal3").value || 0;
+          $pre3 = parseInt($precio3.match(regex).join(""))
+          let $precio4 = document.getElementById("precioTotal4").value || 0;
+          $pre4 = parseInt($precio4.match(regex).join(""))
+          let $precio5 = document.getElementById("precioTotal5").value || 0;
+          $pre5 = parseInt($precio5.match(regex).join(""))
+          let $precio6 = document.getElementById("precioTotal6").value || 0;
+          $pre6 = parseInt($precio6.match(regex).join(""))
+          $total.value = format.format(($pre1 + $pre2 + $pre3 + $pre4 + $pre5 + $pre6) / 100)
+        }
+          break;
+        case "cantidad7": {
+          let $precio1 = document.getElementById("precioTotal1").value || 0;
+          $pre1 = parseInt($precio1.match(regex).join(""))
+          let $precio2 = document.getElementById("precioTotal2").value || 0;
+          $pre2 = parseInt($precio2.match(regex).join(""))
+          let $precio3 = document.getElementById("precioTotal3").value || 0;
+          $pre3 = parseInt($precio3.match(regex).join(""))
+          let $precio4 = document.getElementById("precioTotal4").value || 0;
+          $pre4 = parseInt($precio4.match(regex).join(""))
+          let $precio5 = document.getElementById("precioTotal5").value || 0;
+          $pre5 = parseInt($precio5.match(regex).join(""))
+          let $precio6 = document.getElementById("precioTotal6").value || 0;
+          $pre6 = parseInt($precio6.match(regex).join(""))
+          let $precio7 = document.getElementById("precioTotal7").value || 0;
+          $pre7 = parseInt($precio7.match(regex).join(""))
+          $total.value = format.format(($pre1 + $pre2 + $pre3 + $pre4 + $pre5 + $pre6 + $pre7) / 100)
+        }
+          break;
+        case "cantidad8": {
+          let $precio1 = document.getElementById("precioTotal1").value || 0;
+          $pre1 = parseInt($precio1.match(regex).join(""))
+          let $precio2 = document.getElementById("precioTotal2").value || 0;
+          $pre2 = parseInt($precio2.match(regex).join(""))
+          let $precio3 = document.getElementById("precioTotal3").value || 0;
+          $pre3 = parseInt($precio3.match(regex).join(""))
+          let $precio4 = document.getElementById("precioTotal4").value || 0;
+          $pre4 = parseInt($precio4.match(regex).join(""))
+          let $precio5 = document.getElementById("precioTotal5").value || 0;
+          $pre5 = parseInt($precio5.match(regex).join(""))
+          let $precio6 = document.getElementById("precioTotal6").value || 0;
+          $pre6 = parseInt($precio6.match(regex).join(""))
+          let $precio7 = document.getElementById("precioTotal7").value || 0;
+          $pre7 = parseInt($precio7.match(regex).join(""))
+          let $precio8 = document.getElementById("precioTotal8").value || 0;
+          $pre8 = parseInt($precio8.match(regex).join(""))
+          $total.value = format.format(($pre1 + $pre2 + $pre3 + $pre4 + $pre5 + $pre6 + $pre7 + $pre8) / 100)
+        }
+          break;
+        case "cantidad9": {
+          let $precio1 = document.getElementById("precioTotal1").value || 0;
+          $pre1 = parseInt($precio1.match(regex).join(""))
+          let $precio2 = document.getElementById("precioTotal2").value || 0;
+          $pre2 = parseInt($precio2.match(regex).join(""))
+          let $precio3 = document.getElementById("precioTotal3").value || 0;
+          $pre3 = parseInt($precio3.match(regex).join(""))
+          let $precio4 = document.getElementById("precioTotal4").value || 0;
+          $pre4 = parseInt($precio4.match(regex).join(""))
+          let $precio5 = document.getElementById("precioTotal5").value || 0;
+          $pre5 = parseInt($precio5.match(regex).join(""))
+          let $precio6 = document.getElementById("precioTotal6").value || 0;
+          $pre6 = parseInt($precio6.match(regex).join(""))
+          let $precio7 = document.getElementById("precioTotal7").value || 0;
+          $pre7 = parseInt($precio7.match(regex).join(""))
+          let $precio8 = document.getElementById("precioTotal8").value || 0;
+          $pre8 = parseInt($precio8.match(regex).join(""))
+          let $precio9 = document.getElementById("precioTotal9").value || 0;
+          $pre9 = parseInt($precio9.match(regex).join(""))
+          $total.value = format.format(($pre1 + $pre2 + $pre3 + $pre4 + $pre5 + $pre6 + $pre7 + $pre8 + $pre9) / 100)
+        }
+          break;
+        case "cantidad10": {
+          let $precio1 = document.getElementById("precioTotal1").value || 0;
+          $pre1 = parseInt($precio1.match(regex).join(""))
+          let $precio2 = document.getElementById("precioTotal2").value || 0;
+          $pre2 = parseInt($precio2.match(regex).join(""))
+          let $precio3 = document.getElementById("precioTotal3").value || 0;
+          $pre3 = parseInt($precio3.match(regex).join(""))
+          let $precio4 = document.getElementById("precioTotal4").value || 0;
+          $pre4 = parseInt($precio4.match(regex).join(""))
+          let $precio5 = document.getElementById("precioTotal5").value || 0;
+          $pre5 = parseInt($precio5.match(regex).join(""))
+          let $precio6 = document.getElementById("precioTotal6").value || 0;
+          $pre6 = parseInt($precio6.match(regex).join(""))
+          let $precio7 = document.getElementById("precioTotal7").value || 0;
+          $pre7 = parseInt($precio7.match(regex).join(""))
+          let $precio8 = document.getElementById("precioTotal8").value || 0;
+          $pre8 = parseInt($precio8.match(regex).join(""))
+          let $precio9 = document.getElementById("precioTotal9").value || 0;
+          $pre9 = parseInt($precio9.match(regex).join(""))
+          let $precio10 = document.getElementById("precioTotal10").value || 0;
+          $pre10 = parseInt($precio10.match(regex).join(""))
+          $total.value = format.format(($pre1 + $pre2 + $pre3 + $pre4 + $pre5 + $pre6 + $pre7 + $pre8 + $pre9 + $pre10) / 100)
+        }
+          break;
+        case "cantidad10": {
+          let $precio1 = document.getElementById("precioTotal1").value || 0;
+          $pre1 = parseInt($precio1.match(regex).join(""))
+          let $precio2 = document.getElementById("precioTotal2").value || 0;
+          $pre2 = parseInt($precio2.match(regex).join(""))
+          let $precio3 = document.getElementById("precioTotal3").value || 0;
+          $pre3 = parseInt($precio3.match(regex).join(""))
+          let $precio4 = document.getElementById("precioTotal4").value || 0;
+          $pre4 = parseInt($precio4.match(regex).join(""))
+          let $precio5 = document.getElementById("precioTotal5").value || 0;
+          $pre5 = parseInt($precio5.match(regex).join(""))
+          let $precio6 = document.getElementById("precioTotal6").value || 0;
+          $pre6 = parseInt($precio6.match(regex).join(""))
+          let $precio7 = document.getElementById("precioTotal7").value || 0;
+          $pre7 = parseInt($precio7.match(regex).join(""))
+          let $precio8 = document.getElementById("precioTotal8").value || 0;
+          $pre8 = parseInt($precio8.match(regex).join(""))
+          let $precio9 = document.getElementById("precioTotal9").value || 0;
+          $pre9 = parseInt($precio9.match(regex).join(""))
+          let $precio10 = document.getElementById("precioTotal10").value || 0;
+          $pre10 = parseInt($precio10.match(regex).join(""))
+          let $precio11 = document.getElementById("precioTotal11").value || 0;
+          $pre11 = parseInt($precio11.match(regex).join(""))
+          $total.value = format.format(($pre1 + $pre2 + $pre3 + $pre4 + $pre5 + $pre6 + $pre7 + $pre8 + $pre9 + $pre10 + $pre11) / 100)
+        }
+          break;
+        case "cantidad12": {
+          let $precio1 = document.getElementById("precioTotal1").value || 0;
+          $pre1 = parseInt($precio1.match(regex).join(""))
+          let $precio2 = document.getElementById("precioTotal2").value || 0;
+          $pre2 = parseInt($precio2.match(regex).join(""))
+          let $precio3 = document.getElementById("precioTotal3").value || 0;
+          $pre3 = parseInt($precio3.match(regex).join(""))
+          let $precio4 = document.getElementById("precioTotal4").value || 0;
+          $pre4 = parseInt($precio4.match(regex).join(""))
+          let $precio5 = document.getElementById("precioTotal5").value || 0;
+          $pre5 = parseInt($precio5.match(regex).join(""))
+          let $precio6 = document.getElementById("precioTotal6").value || 0;
+          $pre6 = parseInt($precio6.match(regex).join(""))
+          let $precio7 = document.getElementById("precioTotal7").value || 0;
+          $pre7 = parseInt($precio7.match(regex).join(""))
+          let $precio8 = document.getElementById("precioTotal8").value || 0;
+          $pre8 = parseInt($precio8.match(regex).join(""))
+          let $precio9 = document.getElementById("precioTotal9").value || 0;
+          $pre9 = parseInt($precio9.match(regex).join(""))
+          let $precio10 = document.getElementById("precioTotal10").value || 0;
+          $pre10 = parseInt($precio10.match(regex).join(""))
+          let $precio11 = document.getElementById("precioTotal11").value || 0;
+          $pre11 = parseInt($precio11.match(regex).join(""))
+          let $precio12 = document.getElementById("precioTotal12").value || 0;
+          $pre12 = parseInt($precio12.match(regex).join(""))
+          $total.value = format.format(($pre1 + $pre2 + $pre3 + $pre4 + $pre5 + $pre6 + $pre7 + $pre8 + $pre9 + $pre10 + $pre11 + $pre12) / 100)
+        }
+          break;
+
+        default: $total.value = 0
+          break;
+      }
+
+    }
+
+
+
+  </script>
+</body>
+
+</html>
